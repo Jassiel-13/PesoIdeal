@@ -39,9 +39,11 @@ jobs:
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
       - name: Build and analyze
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
+          cd "P7U1 - Peso Ideal/P7U1 - Peso Ideal"
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Jassiel-13_PesoIdeal" /o:"repositorio-3-0" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build "P7U1 - Peso Ideal.sln"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+
