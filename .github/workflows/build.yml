@@ -1,44 +1,51 @@
-name: .NET with SonarCloud
+name: Build and Analyze with SonarCloud
 
 on:
   push:
     branches:
       - main
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches:
+      - main
 
 jobs:
   build:
-    name: Build and Analyze
     runs-on: windows-latest
 
-    env:
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      MSBUILDDISABLENODEREUSE: 1
-      MSBuildEnableWorkloadResolver: false
-      DOTNET_HOST_ARCH: x64
-      DOTNET_ROOT: C:\Program Files\dotnet\
-
     steps:
+      # Paso 1: Hacer checkout del código
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+      # Paso 2: Configurar el SDK de .NET
+      - name: Set up .NET SDK
+        uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '9.0.x'
 
-      - name: Install SonarScanner for .NET
-        run: dotnet tool install --global dotnet-sonarscanner
+      # Paso 3: Restaurar dependencias
+      - name: Restore dependencies
+        run: dotnet restore "P7U1 - Peso Ideal/P7U1 - Peso Ideal.sln"
 
-      - name: Add dotnet tools to PATH
-        run: echo "$env:USERPROFILE\.dotnet\tools" | Out-File -Append -Encoding ascii $env:GITHUB_PATH
+      # Paso 4: Construir el proyecto
+      - name: Build with .NET
+        run: dotnet build "P7U1 - Peso Ideal/P7U1 - Peso Ideal.sln" --configuration Release
 
-      - name: Start SonarCloud Analysis
-        run: dotnet-sonarscanner begin /k:"Jassiel-13_PesoIdeal" /o:"repositorio-3-0" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+      # Paso 5: Configurar SonarCloud y ejecutar el análisis (begin)
+      - name: Run SonarCloud Analysis - Begin
+        run: |
+          dotnet tool install --global dotnet-sonarscanner
+          dotnet sonarscanner begin /k:"Jassiel-13_PesoIdeal" /o:"repositorio-3-0" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
 
-      - name: Build Solution
-        run: dotnet build "P7U1 - Peso Ideal/P7U1 - Peso Ideal.sln" --configuration Release --runtime win-x64
+      # Paso 6: Ejecutar pruebas
+      - name: Run Tests
+        run: dotnet test "P7U1 - Peso Ideal/P7U1 - Peso Ideal.sln"
 
-      - name: End SonarCloud Analysis
-        run: dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+      # Paso 7: Ejecutar el análisis de SonarCloud (end)
+      - name: Run SonarCloud Analysis - End
+        run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
+      # Paso 8: Publicar los artefactos de la construcción
+      - name: Publish Build Artifacts
+        run: |
+          dotnet publish "P7U1 - Peso Ideal/P7U1 - Peso Ideal.sln" --configuration Release --output publish
