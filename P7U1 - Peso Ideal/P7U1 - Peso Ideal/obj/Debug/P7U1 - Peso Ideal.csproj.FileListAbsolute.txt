@@ -1,0 +1,10 @@
+C:\Users\jassiel\source\repos\P7U1 - Peso Ideal\P7U1 - Peso Ideal\bin\Debug\P7U1 - Peso Ideal.exe.config
+C:\Users\jassiel\source\repos\P7U1 - Peso Ideal\P7U1 - Peso Ideal\bin\Debug\P7U1 - Peso Ideal.exe
+C:\Users\jassiel\source\repos\P7U1 - Peso Ideal\P7U1 - Peso Ideal\bin\Debug\P7U1 - Peso Ideal.pdb
+C:\Users\jassiel\source\repos\P7U1 - Peso Ideal\P7U1 - Peso Ideal\obj\Debug\P7U1 - Peso Ideal.csproj.AssemblyReference.cache
+C:\Users\jassiel\source\repos\P7U1 - Peso Ideal\P7U1 - Peso Ideal\obj\Debug\P7U1___Peso_Ideal.Form1.resources
+C:\Users\jassiel\source\repos\P7U1 - Peso Ideal\P7U1 - Peso Ideal\obj\Debug\P7U1___Peso_Ideal.Properties.Resources.resources
+C:\Users\jassiel\source\repos\P7U1 - Peso Ideal\P7U1 - Peso Ideal\obj\Debug\P7U1 - Peso Ideal.csproj.GenerateResource.cache
+C:\Users\jassiel\source\repos\P7U1 - Peso Ideal\P7U1 - Peso Ideal\obj\Debug\P7U1 - Peso Ideal.csproj.CoreCompileInputs.cache
+C:\Users\jassiel\source\repos\P7U1 - Peso Ideal\P7U1 - Peso Ideal\obj\Debug\P7U1 - Peso Ideal.exe
+C:\Users\jassiel\source\repos\P7U1 - Peso Ideal\P7U1 - Peso Ideal\obj\Debug\P7U1 - Peso Ideal.pdb
